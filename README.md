@@ -8,15 +8,15 @@
 
 ### Objective
 
-This workshop teaches developers how to collaborate effectively with agentic coding systems in order to:
+We want to learn how Coding Agents work and how we can use them to accelerate software development while maintaining architectural control and code quality.
 
-* Scaffold projects faster
+* Understand the agentic coding loop
 * Explore architectural ideas rapidly
-* Refactor and debug systematically
-* Iterate toward cleaner architectures
-* Maintain control over quality, security, and technical decisions
+* Debug systematically
+* Adopt cleaner architectures
+* Make well-documented pull requests
 
-The goal is not automation without oversight — it is accelerated engineering with retained architectural sovereignty.
+The goal is not automation without oversight — it is accelerated engineering.
 
 ---
 
@@ -26,20 +26,20 @@ The goal is not automation without oversight — it is accelerated engineering w
 
 Instead of manually implementing every detail, the developer orchestrates multiple AI-powered tools inside a unified coding interface (e.g., TUI/IDE integration).
 
-The developer remains:
+The developer becomes:
 
 * Architect
-* Reviewer
+* Project manager
 * Decision-maker
-* Quality gate
+* Demand generator
 
 The agent becomes:
 
 * Analyst
 * Draft writer
-* Refactoring assistant
+* Coding assistant
 * Simulation engine
-* Code generator
+* Quality reviewer
 
 Vibe coding is not “AI writes code.”
 It is **structured collaboration within an agentic loop**.
@@ -48,23 +48,37 @@ It is **structured collaboration within an agentic loop**.
 
 ## 3. The Agentic Loop
 
-Understanding the loop is essential.
+When a LLM calls a tool, it is like calling for a lifeline in the game "Who wants to be a millionaire?":
 
-### The Iterative Cycle
+```mermaid
+flowchart TD
+    Q[Game Question] --> C[Candidate Reasons]
+    C -->L{Candidate knows answer?}
+    L -->|No - ask for Lifeline| GM[Game Master Executes Lifeline]
+    GM --> R[Lifeline Result]
+    R --> C
+    L -->|Yes - confidence in answer| A[Final Answer]
+    A --> End[End Round]
+```
 
-1. **Define intent** (goal, constraints, context)
-2. **Agent proposes change / analysis**
-3. **Evaluate output**
-4. **Refine or redirect**
-5. **Validate (tests, linting, review)**
-6. **Commit or iterate**
+This is already the agentic loop, we can turn this into
 
-This loop can be short (fix a bug) or long (full feature implementation).
+```
+flowchart TD
+    Q[Question / Problem] --> C[Agent Reasons]
+    C --> D{Sufficient Knowledge?}
+    D -->|No → Request External Help| GM[External Executor Performs Action]
+    GM --> R[External Result]
+    R --> C
+    D -->|Yes → Commit to Answer| A[Final Answer]
+    A --> End[End]
+```
 
-### Key Principle
+This shows the underlying concept:
 
-> Never skip evaluation.
-> AI acceleration without validation increases technical debt.
+```
+Reason → Evaluate Sufficiency → Externalize → Integrate → Repeat
+```
 
 ---
 

@@ -1,0 +1,192 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- ================= BACKGROUND ================= -->
+<rect width="1600" height="900" fill="#0b1022"/>
+
+<!-- Stage floor -->
+<ellipse cx="800" cy="780" rx="720" ry="140"
+         fill="#101a3a" stroke="#4f8cff" stroke-width="2"/>
+
+<!-- Arena rings -->
+<g transform="translate(800,260)" stroke="#4f8cff" fill="none">
+  <circle r="240" stroke-width="3"/>
+  <circle r="180" stroke-width="2" opacity="0.6"/>
+  <circle r="120" stroke-width="1.5" opacity="0.4"/>
+</g>
+
+<!-- ================= HEADLINES ================= -->
+<text x="250" y="90"
+      fill="#93c5fd"
+      font-size="42"
+      font-family="Arial"
+      font-weight="bold">
+  Candidate
+</text>
+
+<text x="1080" y="90"
+      fill="#93c5fd"
+      font-size="42"
+      font-family="Arial"
+      font-weight="bold">
+  Game Master
+</text>
+
+<!-- ================= LEFT PERSON + CHAIR ================= -->
+<g fill="#0f172a" stroke="#ffffff" stroke-width="2">
+
+  <!-- Chair back -->
+  <path d="M400 420 q200 -220 400 0 v260 h-400z"/>
+
+  <!-- Seat -->
+  <ellipse cx="600" cy="650" rx="140" ry="50"/>
+
+  <!-- Pedestal -->
+  <rect x="585" y="650" width="30" height="130"/>
+
+  <!-- Base -->
+  <ellipse cx="600" cy="810" rx="100" ry="25"/>
+
+  <!-- Torso -->
+  <path d="M520 480 q80 -120 160 0 l-20 150 h-120z"/>
+
+  <!-- Head -->
+  <ellipse cx="600" cy="430" rx="40" ry="45"/>
+
+  <!-- Thighs -->
+  <path d="M540 650 q60 30 120 0 v50 q-60 30 -120 0z"/>
+
+  <!-- Lower legs -->
+  <path d="M560 700 q-20 100 20 140 h40 q-20 -100 -10 -140z"/>
+  <path d="M640 700 q20 100 -20 140 h40 q20 -100 10 -140z"/>
+
+  <!-- Feet -->
+  <ellipse cx="580" cy="850" rx="35" ry="12"/>
+  <ellipse cx="650" cy="850" rx="35" ry="12"/>
+
+</g>
+
+<!-- ================= RIGHT PERSON + CHAIR ================= -->
+<g fill="#0f172a" stroke="#ffffff" stroke-width="2">
+
+  <!-- Chair back -->
+  <path d="M1200 420 q-200 -220 -400 0 v260 h400z"/>
+
+  <!-- Seat -->
+  <ellipse cx="1000" cy="650" rx="140" ry="50"/>
+
+  <!-- Pedestal -->
+  <rect x="985" y="650" width="30" height="130"/>
+
+  <!-- Base -->
+  <ellipse cx="1000" cy="810" rx="100" ry="25"/>
+
+  <!-- Torso -->
+  <path d="M1080 480 q-80 -120 -160 0 l20 150 h120z"/>
+
+  <!-- Head -->
+  <ellipse cx="1000" cy="430" rx="40" ry="45"/>
+
+  <!-- Thighs -->
+  <path d="M1040 650 q-60 30 -120 0 v50 q60 30 120 0z"/>
+
+  <!-- Lower legs -->
+  <path d="M1020 700 q20 100 -20 140 h-40 q20 -100 10 -140z"/>
+  <path d="M940 700 q-20 100 20 140 h-40 q-20 -100 -10 -140z"/>
+
+  <!-- Feet -->
+  <ellipse cx="980" cy="850" rx="35" ry="12"/>
+  <ellipse cx="910" cy="850" rx="35" ry="12"/>
+
+</g>
+
+<!-- ================= DISPLAYS (IN FRONT) ================= -->
+
+<!-- Left display -->
+<polygon points="350,540 750,540 710,640 310,640"
+         fill="#0b1229"
+         stroke="#4f8cff"
+         stroke-width="2"/>
+
+<polygon points="380,565 720,565 690,620 350,620"
+         fill="#1e40af"
+         opacity="0.9"/>
+
+<!-- Right display -->
+<polygon points="850,540 1250,540 1290,640 890,640"
+         fill="#0b1229"
+         stroke="#4f8cff"
+         stroke-width="2"/>
+
+<polygon points="880,565 1220,565 1250,620 910,620"
+         fill="#1e40af"
+         opacity="0.9"/>
+
+<!-- Central console -->
+<polygon points="740,640 860,640 900,720 700,720"
+         fill="#0c1229"
+         stroke="#4f8cff"
+         stroke-width="2"/>
+
+<!-- ================= LIFELINE PANEL ================= -->
+<g transform="translate(1050,140)">
+
+  <rect width="460" height="280"
+        rx="20"
+        fill="#0c1229"
+        stroke="#4f8cff"
+        stroke-width="2"/>
+
+  <!-- 50/50 -->
+  <rect x="40" y="30" width="380" height="50"
+        rx="12"
+        fill="#111827"
+        stroke="#4f8cff"
+        stroke-width="1.5"/>
+  <text x="230" y="63"
+        font-size="22"
+        text-anchor="middle"
+        fill="#93c5fd"
+        font-family="Arial">
+    50 / 50
+  </text>
+
+  <!-- Call -->
+  <rect x="40" y="95" width="380" height="50"
+        rx="12"
+        fill="#111827"
+        stroke="#4f8cff"
+        stroke-width="1.5"/>
+  <text x="230" y="128"
+        font-size="22"
+        text-anchor="middle"
+        fill="#93c5fd"
+        font-family="Arial">
+    Call
+  </text>
+
+  <!-- Audience Vote -->
+  <rect x="40" y="160" width="380" height="50"
+        rx="12"
+        fill="#111827"
+        stroke="#4f8cff"
+        stroke-width="1.5"/>
+  <text x="230" y="193"
+        font-size="22"
+        text-anchor="middle"
+        fill="#93c5fd"
+        font-family="Arial">
+    Audience Vote
+  </text>
+
+  <!-- Empty dotted -->
+  <rect x="40" y="225" width="380" height="50"
+        rx="12"
+        fill="#111827"
+        stroke="#93c5fd"
+        stroke-width="1.5"
+        stroke-dasharray="6 6"/>
+
+</g>
+
+</svg>

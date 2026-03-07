@@ -1,54 +1,124 @@
 # Vibe Coding Workshop
 
-**Practical AI Workflows for Developers**
+"How does it work" is the main objective. Therefore we have several targets for this workshop:
 
----
-
-## 1. Workshop Overview
-
-### Objective
-
-We want to learn how Coding Agents work and how we can use them to accelerate software development while maintaining architectural control and code quality.
-
+* We want to learn how coding agents work
 * Understand the agentic coding loop
-* Explore architectural ideas rapidly
-* Debug systematically
-* Adopt cleaner architectures
-* Make well-documented pull requests
 
-The goal is not automation without oversight — it is accelerated engineering.
+* Have an overview over the available coding agent software
+* Install local coding agents: you don't need to buy tokens
+
+* What **can** we do with coding agents
+* What **should** we do with coding agents
+
+-> Do this now:
+
+clone https://github.com/Orbiter/vibe-coding-workshop
 
 ---
 
-## 2. What Is Vibe Coding?
+## The Workshop files
+
+```
+vibe-coding-workshop
+├── agents
+│   └── opencode
+│       └── opencode.config
+│   └── ollama
+│       ├── docker-ollama-cpu.sh
+│       ├── docker-ollama-gpu.sh
+│       ├── docker-ollama-update.sh
+│       ├── ollama_serve.sh
+│       └── ollama_update.sh
+└── README.md
+```
+
+This is mainly about the opencode config and the ollama helper scripts.
+
+And you get the workshop slides in README.md
+
+---
+
+## This is experimental
+
+* I don't know what happens
+* You maybe know it much better
+* I bring some insights that I find helpful
+* Things true today are wrong tomorrow
+* I wasted too much time to vibe-code this presentation app
+* I hate bullet-point presentations, sorry
+
+---
+
+## Workshop Set-Up
+
+* we download Ollama from http://ollama.com
+* when ollama is running, we load a model, then do:
+  * `ollama run qwen3.5:4b` if you have at least 8GB RAM
+  * `ollama run qwen3.5:9b` if you have at least 16GB RAM
+  * `ollama run qwen3.5:35b` if you have at least 32GB RAM
+
+That will make it possible to run local models and use opencode locally.
+
+* Download and install https://opencode.ai/
+* we configure it to run with our own model, so you need the workshop repository for it (did you clone the repository https://github.com/Orbiter/vibe-coding-workshop ?)
+
+If you have a 20$ OpenAI subscription:
+
+* Download and install Codex CLI: https://developers.openai.com/codex/cli/
+
+Do all of that right now because it takes time...
+
+---
+
+## What Is Vibe Coding?
+
 
 **Vibe Coding** is a paradigm shift in software development:
-
-Instead of manually implementing every detail, the developer orchestrates multiple AI-powered tools inside a unified coding interface (e.g., TUI/IDE integration).
+Instead of manually implementing every detail, the developer orchestrates multiple AI-powered
+tools inside a coding interface (e.g., TUI/IDE integration).
 
 The developer becomes:
 
 * Architect
-* Project manager
-* Decision-maker
+* Project manager / Decision-maker
 * Demand generator
 
 The agent becomes:
 
 * Analyst
-* Draft writer
-* Coding assistant
+* Draft writer / Coding assistant
 * Simulation engine
 * Quality reviewer
 
 Vibe coding is not “AI writes code.”
-It is **structured collaboration within an agentic loop**.
+It is **collaboration within an agentic loop**.
+
+![Andrej Karpathy defines Vibe Coding](./img/20250203_Andrej_Karpathy_Vibe_Coding.png =600x)
 
 ---
 
-## 3. The Agentic Loop
+## The Agentic Loop (in real life)
 
 When a LLM calls a tool, it is like calling for a lifeline in the game "Who wants to be a millionaire?":
+
+![Who Wants To Be A Millionair](./img/wwtbam-people.svg =1200x)
+
+Game Master asks question -> Candidate ask back "I want a lifeline" -> Game Master performs lifeline 
+
+## The Agentic Loop (in AI)
+
+When a LLM calls a tool, it is like calling for a lifeline in the game "Who wants to be a millionaire?":
+
+![Who Wants To Be A Millionair](./img/wwtbam-agents.svg =1200x)
+
+User asks question -> LLM ask back "I want a tool" -> User (chat) framework executes tool 
+
+---
+
+## Agentic Loop Comparison
+
+WWTBAM <-> Agentic Loop
 
 ```mermaid
 flowchart TD
@@ -57,56 +127,31 @@ flowchart TD
     L -->|No - ask for Lifeline| GM[Game Master Executes Lifeline]
     GM --> R[Lifeline Result]
     R --> C
-    L -->|Yes - confidence in answer| A[Final Answer]
+    L -->|Yes - confidence in answer| A[Candidate Answer]
     A --> End[End Round]
 ```
 
-This is already the agentic loop, we can turn this into
+Vs
 
 ```
 flowchart TD
-    Q[Question / Problem] --> C[Agent Reasons]
-    C --> D{Sufficient Knowledge?}
-    D -->|No → Request External Help| GM[External Executor Performs Action]
-    GM --> R[External Result]
+    Q[User Prompt] --> C[Agent Reasons]
+    C --> D{LLM knows answer?}
+    D -->|No → Request Tool Call| GM[Agent Performs Function Calling]
+    GM --> R[Tool Result]
     R --> C
-    D -->|Yes → Commit to Answer| A[Final Answer]
-    A --> End[End]
+    D -->|Yes → Commit to Answer| A[Agent Response]
+    A --> End[End Round]
 ```
 
-This shows the underlying concept:
-
-```
-Reason → Evaluate Sufficiency → Externalize → Integrate → Repeat
-```
 
 ---
 
-## 4. Assessment of Agentic Coding Tools
+## Assessment of Agentic Coding Tools
 
-Before using any tool in production, evaluate it along these dimensions:
-
-### Technical Capabilities
-
-* Tool calling support
-* Context window size
-* Codebase awareness
-* Multi-file reasoning
-* Structured output reliability
-
-### Governance
-
-* On-prem vs cloud
-* Data retention policies
-* Auditability
-* Deterministic replay capability
-
-### Engineering Fit
-
-* Integration with CI/CD
-* Diff-awareness
-* Git integration
-* Test generation quality
+| Technical Capabilities | Governance | Engineering Fit |
+| --- | --- | --- |
+| - Tool calling support<br>- Context window size<br>- Codebase awareness<br>- Multi-file reasoning<br>- Structured output reliability | - On-prem vs cloud<br>- Data retention policies<br>- Auditability<br>- Deterministic replay capability | - Integration with CI/CD<br>- Diff-awareness<br>- Git integration<br>- Test generation quality |
 
 ---
 
@@ -142,10 +187,6 @@ Challenges:
 * Latency
 * Vendor dependency
 
-Workshop includes:
-
-* Comparative evaluation
-* Decision criteria for enterprise contexts
 
 ---
 

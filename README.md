@@ -195,9 +195,10 @@ Codex comes in two versions:
 - as a command-line version, simply start `codex` in you terminal.
 - as a desktop application, you can download this from https://developers.openai.com/codex/cli/
 
+
 ---
 
-## Prompt Examples: Code Understanding and Set-Up
+## Prompt Examples: Understand
 
 **Goal:** Understand the code
 ```
@@ -206,24 +207,15 @@ the communication components, the configuration options and other details.
 Then write (or extend) an AGENTS.md with your insights.
 ```
 
-**Goal:** (Optional) Prepare AGENTS.md for your coding style
+**Goal:** Understand system structure and weaknesses.
 ```
-I want to prepare pull requests for this project. Change your coding style
-in such a way that every change is restricted to not more than three files.
-Changes which require more files to be modified should be splitted into
-several commit steps, do a step-by-step refinement of the prompt
-and recommend separated commit steps.
-Write/add this to the AGENTS.md file.
+Analyze the codebase and create a system architecture sketch
+with components and their relationships using a mermaid diagram.
 ```
 
 ---
 
-## Prompt Examples: Project Maintentance
-
-**Goal:** Find out how to process
-```
-Suggest what we should implement next.
-```
+## Prompt Examples: Improve
 
 **Goal:** Clean up
 ```
@@ -238,50 +230,19 @@ Check the code for unnecessary or imperformant computation.
 Also suggest where caches may help. Be creative. 
 ```
 
----
-
-## Prompt Examples: Advanced Project Maintentance
-
-**Goal:** Work on tickets
+**Goal:** Testing
 ```
-Check the issue tracker at https://github.com/yacy/yacy_search_server/issues
-and suggest which ticket should be done next, order by most impact on user experience.
+Find methods to test this code and write testing functions or programs.
 ```
-
-**Goal:** Solve tickets
-```
-Solve https://github.com/yacy/yacy_search_server/issues/749
-```
-
-**Goal:** Create a ticket
-```
-Identify possible memory leak problems.
-If you find any, write a ticket for a bug report.
-```
-
----
-
-## Prompt Examples: Working as a software architect
 
 **Goal:** Library Assessment
 ```
 Provide best practices and suitable libraries for implementing the database integration.
 ```
 
-**Goal:** Testing
-```
-Find methods to test this code and write testing functions or programs.
-```
-
-**Goal:** Understand system structure and weaknesses.
-```
-Analyze the codebase and create a system architecture sketch
-with components and their relationships using a mermaid diagram.
-```
-
 ---
 
-## Prompt Examples: Post-Coding Tools
+## Prompt Examples: Review
 
 **Goal:** Use the agent as a quality filter.
 ```
@@ -293,10 +254,6 @@ Make a git diff and determine whether the changes introduce errors.
 Make a git diff and write a commit message
 ```
 
-**Goal:** Commit code (requires `gh`)
-```
-Make a git diff, write a commit message and commit the code.
-```
 ---
 
 ## Our Own Coding Agent
@@ -359,3 +316,45 @@ done
 
 ---
 
+## Prompt Examples: Delegate
+
+**Goal:** Work on tickets
+```
+Check the issue tracker at https://github.com/yacy/yacy_search_server/issues
+and suggest which ticket should be done next, order by most impact on user experience.
+```
+
+**Goal:** Solve tickets
+```
+Solve https://github.com/yacy/yacy_search_server/issues/749
+```
+
+**Goal:** Create a ticket
+```
+Identify possible memory leak problems.
+If you find any, write a ticket for a bug report.
+```
+
+**Goal:** Find out how to process
+```
+Suggest what we should implement next.
+```
+
+---
+
+## Prompt Examples: Operate
+
+**Goal:** (Optional) Prepare AGENTS.md for your coding style
+```
+I want to prepare pull requests for this project. Change your coding style
+in such a way that every change is restricted to not more than three files.
+Changes which require more files to be modified should be splitted into
+several commit steps, do a step-by-step refinement of the prompt
+and recommend separated commit steps.
+Write/add this to the AGENTS.md file.
+```
+
+**Goal:** Commit code (requires `gh`)
+```
+Make a git diff, write a commit message and commit the code.
+```

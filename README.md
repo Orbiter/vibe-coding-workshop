@@ -2,11 +2,11 @@
 
 "How does it work" is the main objective. Therefore we have several targets for this workshop:
 
+* I want to show codex, opencode and a self-made agent
+* Install local coding agents: you don't need to buy tokens
+
 * We want to learn how coding agents work
 * Understand the agentic coding loop
-
-* Have an overview over the available coding agent software
-* Install local coding agents: you don't need to buy tokens
 
 * What **can** we do with coding agents
 * What **should** we do with coding agents
@@ -17,13 +17,35 @@ clone https://github.com/Orbiter/vibe-coding-workshop
 
 ---
 
+## Cloning the Workshop files
+
+It could be that there are not-developers here, so this is how you get the workshop files:
+
+- you must open a terminal
+- you must have `git` installed
+- in the terminal, you type
+```
+git clone https://github.com/Orbiter/vibe-coding-workshop.git
+```
+- you would find out about that by opening https://github.com/Orbiter/vibe-coding-workshop
+- then click on the green "code" button
+- you copy the https clone address
+
+If you never cloned a repository, its good to make first make a `git` folder where you can clone all cloned projects inside.
+
+---
+
 ## The Workshop files
 
 ```
 vibe-coding-workshop
 ├── agents
-│   └── opencode
-│       └── opencode.config
+│   ├── opencode
+│   │   └── opencode.json
+│   └── opx
+│       ├── opx.sh
+│       └── README.md
+├── inference
 │   └── ollama
 │       ├── docker-ollama-cpu.sh
 │       ├── docker-ollama-gpu.sh
@@ -33,17 +55,15 @@ vibe-coding-workshop
 └── README.md
 ```
 
-This is mainly about the opencode config and the ollama helper scripts.
-
-And you get the workshop slides in README.md
+This gives you the workshop slides (in `README.md`), a opencode.json config, ollama helper scripts and a very simple coding agent `opx.sh`.
 
 ---
 
 ## This is experimental
 
 * I don't know what happens
-* You maybe know it much better
-* I bring some insights that I find helpful
+* You maybe know it much better, pls share it
+* I try to bring some insights that I find helpful
 * Things true today are wrong tomorrow
 * I wasted too much time to vibe-code this presentation app
 * I hate bullet-point presentations, sorry
@@ -54,11 +74,15 @@ And you get the workshop slides in README.md
 
 * we download Ollama from http://ollama.com
 * when ollama is running, we load a model, then do:
-  * `ollama run qwen3.5:4b` if you have at least 8GB RAM
-  * `ollama run qwen3.5:9b` if you have at least 16GB RAM
-  * `ollama run qwen3.5:35b` if you have at least 32GB RAM
+  * `ollama pull qwen3.5:4b` if you have at least 8GB RAM
+  * `ollama pull qwen3.5:9b` if you have at least 16GB RAM
+  * `ollama pull qwen3.5:35b` if you have at least 32GB RAM
 
 That will make it possible to run local models and use opencode locally.
+You then can also run a prompt in the command shell like
+```
+ollama run qwen3.5:4b
+```
 
 * Download and install https://opencode.ai/
 * we configure it to run with our own model, so you need the workshop repository for it (did you clone the repository https://github.com/Orbiter/vibe-coding-workshop ?)
@@ -81,14 +105,13 @@ tools inside a coding interface (e.g., TUI/IDE integration).
 The developer becomes:
 
 * Architect
-* Project manager / Decision-maker
+* Decision-maker
 * Demand generator
 
 The agent becomes:
 
 * Analyst
-* Draft writer / Coding assistant
-* Simulation engine
+* Coding assistant
 * Quality reviewer
 
 Vibe coding is not “AI writes code.”
@@ -131,7 +154,7 @@ flowchart TD
     A --> End[End Round]
 ```
 
-Vs
+.
 
 ```
 flowchart TD
@@ -144,332 +167,195 @@ flowchart TD
     A --> End[End Round]
 ```
 
-
 ---
 
-## Assessment of Agentic Coding Tools
+## Set-up Opencode With Ollama Models
 
-| Technical Capabilities | Governance | Engineering Fit |
-| --- | --- | --- |
-| - Tool calling support<br>- Context window size<br>- Codebase awareness<br>- Multi-file reasoning<br>- Structured output reliability | - On-prem vs cloud<br>- Data retention policies<br>- Auditability<br>- Deterministic replay capability | - Integration with CI/CD<br>- Diff-awareness<br>- Git integration<br>- Test generation quality |
-
----
-
-## 5. Local Inference vs Cloud Services
-
-### Local Inference Engines
-
-Advantages:
-
-* Full data sovereignty
-* Offline operation
-* Custom fine-tuning
-* Predictable cost
-
-Challenges:
-
-* Hardware requirements
-* Setup complexity
-* Model management
-
-### Cloud Services
-
-Advantages:
-
-* High-quality frontier models
-* Zero infrastructure setup
-* Elastic scaling
-
-Challenges:
-
-* Cost unpredictability
-* Data compliance
-* Latency
-* Vendor dependency
-
-
----
-
-## 6. Configuring a Local Workflow (Example: OpenCode + Local Inference)
-
-Practical segment:
-
-* Connecting opencode to a local inference engine
-* Configuring context limits
-* Tool activation and chaining
-* Git integration
-* Structured output enforcement
-* Logging and replay configuration
-
-Participants will:
-
-* Connect to a local model
-* Execute analysis prompts
-* Trigger tool calls
-* Run iterative coding loops
-
----
-
-# Practical Application Modules
-
-The following sections define structured use cases for vibe coding.
-
----
-
-# Module 1 — Analytical Tools: Understand Before Changing
-
-The first rule of vibe coding:
-
-> Analyze first. Modify second.
-
----
-
-### 1. Debugging
-
-**Goal:** Identify root causes and produce structured corrective proposals.
-
+When you downloaded and installed opencode, it wants to connect to some
+cloud services for inference. We configure it to use our own ollama instance:
 ```
-Identify the root cause of the performance degradation under high load.
-Create a detailed error analysis including corrective suggestions.
+cp vibe-coding-workshop/agents/opencode/opencode.json ~/.config/opencode
+```
+Then start opencode. When it is running, type inside opencode:
+```
+/connect
+```
+- you must do this for *Plan* and *Build* (toggle with tab)
+- for the API key, enter anything
+- select the ollama model that you downloaded.
+
+This is configured to use `qwen3.5:4b` by default, if you downloaded this you don't need to use `/connect`
+
+---
+
+## Codex demo
+
+Codex comes in two versions:
+
+- as a command-line version, simply start `codex` in you terminal.
+- as a desktop application, you can download this from https://developers.openai.com/codex/cli/
+
+---
+
+## Prompt Examples: Code Understanding and Set-Up
+
+**Goal:** Understand the code
+```
+Read the code and describe the overall architecture, the data flow,
+the communication components, the configuration options and other details.
+Then write (or extend) an AGENTS.md with your insights.
+```
+
+**Goal:** (Optional) Prepare AGENTS.md for your coding style
+```
+I want to prepare pull requests for this project. Change your coding style
+in such a way that every change is restricted to not more than three files.
+Changes which require more files to be modified should be splitted into
+several commit steps, do a step-by-step refinement of the prompt
+and recommend separated commit steps.
+Write/add this to the AGENTS.md file.
 ```
 
 ---
 
-### 2. Intelligent Search
+## Prompt Examples: Project Maintentance
 
-**Goal:** Extract architectural knowledge from the codebase.
-
+**Goal:** Find out how to process
 ```
-Find all implementations of user authentication in the project
-and show their interaction with other components.
+Suggest what we should implement next.
 ```
 
----
-
-### 3. Code Analysis & Architecture Sketching
-
-**Goal:** Understand system structure and weaknesses.
-
+**Goal:** Clean up
 ```
-Analyze the codebase and create a system architecture sketch with components and their relationships
-using a mermaid diagram. Identify potential security vulnerabilities and code quality issues.
+Check the code for superfluous functions, unused libraries and
+suggest how to reduce the number of lines by refactoring.
+Make a full list, order by impact. Do not make changes.
 ```
 
----
-
-### 4. CI/CD & Pre-Commit Integration
-
-**Goal:** Use the agent as a quality pre-filter.
-
+**Goal:** Speed up
 ```
-Perform a git diff and determine whether the changes introduce errors.
+Check the code for unnecessary or imperformant computation.
+Also suggest where caches may help. Be creative. 
 ```
 
 ---
 
-### 5. Design Pattern Recommendations
+## Prompt Examples: Advanced Project Maintentance
 
-**Goal:** Improve structural quality based on context.
+**Goal:** Work on tickets
+```
+Check the issue tracker at https://github.com/yacy/yacy_search_server/issues
+and suggest which ticket should be done next, order by most impact on user experience.
+```
 
+**Goal:** Solve tickets
+```
+Solve https://github.com/yacy/yacy_search_server/issues/749
+```
+
+**Goal:** Create a ticket
+```
+Identify possible memory leak problems.
+If you find any, write a ticket for a bug report.
+```
+
+---
+
+## Prompt Examples: Working as a software architect
+
+**Goal:** Library Assessment
 ```
 Provide best practices and suitable libraries for implementing the database integration.
 ```
 
----
-
-### 6. Technology Evaluation
-
-**Goal:** Make evidence-based technical decisions.
-
+**Goal:** Testing
 ```
-Conduct an assessment of time-series visualization libraries in Python
-for the existing test data in the test/ directory.
+Find methods to test this code and write testing functions or programs.
 ```
 
----
-
-# Module 2 — Quality and Governance Support
-
-AI is not only a productivity accelerator — it is a governance amplifier.
-
----
-
-### 1. Policy Enforcement
-
+**Goal:** Understand system structure and weaknesses.
 ```
-Review the entire codebase for violations of our coding guidelines and GDPR requirements.
-Create a compliance report.
+Analyze the codebase and create a system architecture sketch
+with components and their relationships using a mermaid diagram.
 ```
 
 ---
 
-### 2. Security Threat Modeling
+## Prompt Examples: Post-Coding Tools
+
+**Goal:** Use the agent as a quality filter.
+```
+Make a git diff and determine whether the changes introduce errors.
+```
+
+**Goal:** Write a commit message
+```
+Make a git diff and write a commit message
+```
+
+**Goal:** Commit code (requires `gh`)
+```
+Make a git diff, write a commit message and commit the code.
+```
+---
+
+## Our Own Coding Agent
+
+In `vibe-coding-workshop/agents/opx/opx.sh` we have a minimal coding agent, written in `bash` entirely.
+It provides two tools: `bash` and `write_file`.
 
 ```
-Create a threat model for the new payment system and identify potential attack vectors in the design.
+vibe-coding-workshop/agents/opx/opx.sh "Make a git diff and write a commit message"
+```
+
+The agent can run with the ollama models:
+
+```
+% vibe-coding-workshop/agents/opx/opx.sh -h
+Usage: opx.sh [options] <prompt>
+Options:
+  -m <model>      model name (default: qwen3.5:4b)
+  -h <host>       hostname (default: localhost)
+  -p <port>       port number (default: 11434)
+  -a              auto-grant configured safe commands
+  --help          show help and exit
+
+Auto-granted commands (used only with -a): ls, ls *, pwd, git status, git diff, git diff *
 ```
 
 ---
 
-### 3. Technical Debt Analysis
+## The Agentic Loop (in code)
+
+This is the actual code of the agentic loop in `opx.sh`
 
 ```
-Assess the technical debt of the legacy module and prioritize refactoring measures
-based on business impact.
-```
+while :; do
+  # Start a fresh turn before asking the model what to do next.
+  tool_name=""; tool_args_unescaped=""; tool_id=""; tool_input=""
+  json="$(jq -cn --arg model "$model" --argjson messages "$messages" --argjson tools "$tools" '{model:$model,messages:$messages,tools:$tools,stream:false}')"
 
----
+  # Call the LLM and request the next assistant response from the model.
+  response=""
+  if ! response="$(curl -sS -f -H "Content-Type: application/json" -d "$json" "$url")"; then
+    echo "Network error" >&2
+    exit 1
+  fi
 
-# Module 3 — Code Generation & Structured Implementation
+  # Extract assistant text plus any requested tool call from the response.
+  extract_response_fields "$response"
+  if [ -n "$chunk" ]; then printf '%s' "$chunk"; fi
 
-Generation without structure leads to chaos.
-Generation inside a loop leads to acceleration.
+  # Feed tool results back into the conversation until the model stops asking.
+  if handle_tool_call; then
+    log "Tool result appended to the conversation; continuing the loop."
+    continue
+  fi
 
----
-
-### 1. Bug Fixing via Prompt
-
-```
-Fix the null pointer exception in the user loading workflow and document the solution for the ticketing system.
-```
-
----
-
-### 2. Documentation & Knowledge Generation
-
-```
-Automatically generate API documentation in Swagger format, code comments,
-and an installation guide for the authentication module.
-```
-
----
-
-### 3. Test Case Generation
-
-```
-Generate comprehensive unit and integration tests for the existing order processing logic,
-including edge cases.
+  # No tool call means the current assistant answer is final.
+  break
+done
 ```
 
 ---
-
-### 4. Feature & User Story Implementation
-
-```
-Read the feature list from the ticketing system and identify three with the highest impact
-on processing speed. Then implement these features.
-```
-
----
-
-### 5. Boilerplate Code Generation
-
-```
-Generate boilerplate for a new REST API module including database schema and
-Docker deployment configuration.
-```
-
----
-
-# Module 4 — Innovation Acceleration
-
-Vibe coding drastically reduces time-to-feedback.
-
----
-
-### 1. Prototyping & Spike Development
-
-```
-Create a proof of concept for integrating AI-driven product recommendations into the shopping cart.
-```
-
----
-
-### 2. Feature Evolution
-
-```
-Extend the user profile page with social media integration
-based on the attached protocol of potential features.
-```
-
----
-
-### 3. Rapid Performance Optimization
-
-```
-Identify suggestions for improving load times on the product page
-and implement the most promising ones in a spike.
-```
-
----
-
-### 4. Entry Barrier Reduction
-
-```
-Explain how the existing database integration works
-and generate an example implementation in Python.
-```
-
----
-
-### 5. Simulation & Scenario Modeling
-
-```
-Write a program to generate 10,000 test orders with different load profiles.
-These should be executed in a script to evaluate the scalability of the order processing logic.
-```
-
----
-
-# Practical Workshop Flow (Suggested Agenda)
-
-### Part 1 — Foundations (Theory + Discussion)
-
-* What is vibe coding?
-* The agentic loop
-* Tool assessment framework
-* Local vs cloud strategy
-
-### Part 2 — Environment Setup (Hands-On)
-
-* Configure local inference
-* Connect opencode
-* Run analytical prompts
-* Validate structured outputs
-
-### Part 3 — Guided Exercises
-
-* Debugging session
-* Architecture sketching
-* Threat modeling
-* Feature implementation loop
-
-### Part 4 — Advanced Workflows
-
-* Governance integration
-* CI/CD automation
-* Multi-step tool chaining
-* Spike-driven innovation
-
----
-
-# Final Principles
-
-1. AI is an amplifier — not a replacement.
-2. Analysis precedes modification.
-3. Every generation step requires validation.
-4. Governance is not optional.
-5. The developer remains architect and final authority.
-
----
-
-# Outcome of the Workshop
-
-Participants will:
-
-* Understand the agentic coding loop
-* Evaluate AI tooling strategically
-* Configure local inference setups
-* Execute structured AI workflows
-* Accelerate implementation without sacrificing quality
 

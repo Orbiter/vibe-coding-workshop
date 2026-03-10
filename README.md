@@ -2,20 +2,19 @@
 
 "How does it work" is the main objective. Therefore we have several targets for this workshop:
 
-* I want to show codex, opencode and a self-made agent
-* Install local coding agents: you don't need to buy tokens
-
-* We want to learn how coding agents work
+* We want to learn how coding agents work and how to use them
 * Understand the agentic coding loop
 
 * What **can** we do with coding agents
 * What **should** we do with coding agents
 
+* I want to show codex, opencode and a self-made agent
+* Install local inference and coding agents: you don't need to buy tokens
+
 -> Do this now:
 
 clone https://github.com/Orbiter/vibe-coding-workshop
 
----
 
 ## Cloning the Workshop files
 
@@ -33,7 +32,6 @@ git clone https://github.com/Orbiter/vibe-coding-workshop.git
 
 If you never cloned a repository, its good to make first make a `git` folder where you can clone all cloned projects inside.
 
----
 
 ## The Workshop files
 
@@ -57,18 +55,6 @@ vibe-coding-workshop
 
 This gives you the workshop slides (in `README.md`), a opencode.json config, ollama helper scripts and a very simple coding agent `opx.sh`.
 
----
-
-## This is experimental
-
-* I don't know what happens
-* You maybe know it much better, pls share it
-* I try to bring some insights that I find helpful
-* Things true today are wrong tomorrow
-* I wasted too much time to vibe-code this presentation app
-* I hate bullet-point presentations, sorry
-
----
 
 ## Workshop Set-Up
 
@@ -93,10 +79,8 @@ If you have a 20$ OpenAI subscription:
 
 Do all of that right now because it takes time...
 
----
 
 ## What Is Vibe Coding?
-
 
 **Vibe Coding** is a paradigm shift in software development:
 Instead of manually implementing every detail, the developer orchestrates multiple AI-powered
@@ -119,7 +103,25 @@ It is **collaboration within an agentic loop**.
 
 ![Andrej Karpathy defines Vibe Coding](./img/20250203_Andrej_Karpathy_Vibe_Coding.png =600x)
 
----
+
+## Core Question
+
+* "How do you write the best prompt (..that always work)?"
+* There is no such thing. Good Vibe coding is a series of best practices that also exist outside the use of AI
+* You should (as a good programmer)
+  * understand the code basis and the used libraries
+  * understand the task you want to perform
+  * separate your task into smaller controllable steps
+  * discuss option, alternatives, risks & advantages
+  * explore different approaches
+* A good approach for different prompt categories:
+  * Understand - simply explore the code
+  * Improve - clean up, spead up, test
+  * Review - check quality, create documentation
+  * Delegate - do coding work (with precision)
+  * Operate - CI process & git operation, commit messages
+* Be responsible for the result. Don't say "AI did that". You did. AI is just a tool.
+
 
 ## The Agentic Loop (in real life)
 
@@ -129,6 +131,7 @@ When a LLM calls a tool, it is like calling for a lifeline in the game "Who want
 
 Game Master asks question -> Candidate ask back "I want a lifeline" -> Game Master performs lifeline 
 
+
 ## The Agentic Loop (in AI)
 
 When a LLM calls a tool, it is like calling for a lifeline in the game "Who wants to be a millionaire?":
@@ -137,7 +140,6 @@ When a LLM calls a tool, it is like calling for a lifeline in the game "Who want
 
 User asks question -> LLM ask back "I want a tool" -> User (chat) framework executes tool 
 
----
 
 ## Agentic Loop Comparison
 
@@ -167,7 +169,6 @@ flowchart TD
     A --> End[End Round]
 ```
 
----
 
 ## Set-up Opencode With Ollama Models
 
@@ -186,7 +187,6 @@ Then start opencode. When it is running, type inside opencode:
 
 This is configured to use `qwen3.5:4b` by default, if you downloaded this you don't need to use `/connect`
 
----
 
 ## Codex demo
 
@@ -195,8 +195,6 @@ Codex comes in two versions:
 - as a command-line version, simply start `codex` in you terminal.
 - as a desktop application, you can download this from https://developers.openai.com/codex/cli/
 
-
----
 
 ## Prompt Examples: Understand
 
@@ -213,7 +211,6 @@ Analyze the codebase and create a system architecture sketch
 with components and their relationships using a mermaid diagram.
 ```
 
----
 
 ## Prompt Examples: Improve
 
@@ -240,7 +237,6 @@ Find methods to test this code and write testing functions or programs.
 Provide best practices and suitable libraries for implementing the database integration.
 ```
 
----
 
 ## Prompt Examples: Review
 
@@ -254,7 +250,6 @@ Make a git diff and determine whether the changes introduce errors.
 Make a git diff and write a commit message
 ```
 
----
 
 ## Our Own Coding Agent
 
@@ -280,7 +275,6 @@ Options:
 Auto-granted commands (used only with -a): ls, ls *, pwd, git status, git diff, git diff *
 ```
 
----
 
 ## The Agentic Loop (in code)
 
@@ -314,7 +308,6 @@ while :; do
 done
 ```
 
----
 
 ## Prompt Examples: Delegate
 
@@ -340,7 +333,6 @@ If you find any, write a ticket for a bug report.
 Suggest what we should implement next.
 ```
 
----
 
 ## Prompt Examples: Operate
 
